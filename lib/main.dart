@@ -1,9 +1,45 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 // lovedun
 void main() {
   runApp(const MyApp());
 }
 
+const List<String> list = <String>['운동', '공부 ', '자기관리'];
+
+class DropdownButtonExample extends StatefulWidget {
+  const DropdownButtonExample({super.key});
+
+  @override
+  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+}
+
+class _DropdownButtonExampleState extends State<DropdownButtonExample> {
+  String dropdownValue = list.first;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_drop_down),
+      elevation: 16,
+      style: const TextStyle(color: Colors.black),
+      onChanged: (String? value) {
+        // This is called when the user selects an item.
+        setState(() {
+          dropdownValue = value!;
+        });
+      },
+      items: list.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,47 +51,29 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('working',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              Text('Time',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FloatingActionButton(
-                    onPressed: (){},
-                    foregroundColor: Colors.red,
-                    backgroundColor: Colors.black,
-                    child: const Icon(
-                        Icons.directions_walk,
-                        color: Colors.white,
-                      ),
-                  ),
-                  FloatingActionButton(
-                    onPressed: (){},
-                    backgroundColor: Colors.black,
-                    child: const Icon(
-                      Icons.accessibility_new,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
+        body:
+          AlertDialog(
+            title:
+            Row(
+              children: const [
+                Text("태그 설정"),
+                Icon(Icons.settings),
+                CloseButton(),
+              ],
+            ),
+            titleTextStyle:
+            TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,fontSize: 20),
+            actionsOverflowButtonSpacing: 20,
+            actions: [
+              ElevatedButton(onPressed: (){
+              }, child: Text("취소")),
+              ElevatedButton(onPressed: (){
+              }, child: Text("확인")),
             ],
-          )
-        ),
+            content: DropdownButtonExample()
+          ),
         bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: false,
             showUnselectedLabels: false,
