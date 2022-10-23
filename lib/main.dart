@@ -1,113 +1,18 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:work_life_blended/pages/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-void FlutterDialog() {
-
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          title:
-          Row(
-            children: const[
-              Icon(Icons.access_alarm),
-              Text('WORABLE', style: TextStyle(fontSize: 14, letterSpacing: 3),),
-            ],
-          ),
-
-          backgroundColor: Colors.black,
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('홍길동님, 환영합니다!',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FloatingActionButton.large(
-                    shape: CircleBorder(
-                        side: BorderSide(color: Colors.white, width: 2)),
-                    onPressed: () => FlutterDialog(),
-                    backgroundColor: Colors.black,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.directions_walk,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'working',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  FloatingActionButton.large(
-                    shape: CircleBorder(
-                        side: BorderSide(color: Colors.white, width: 2)),
-                    onPressed: () {},
-                    backgroundColor: Colors.black,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.accessibility_new,
-                          color: Colors.white,
-                        ),
-                        Text('resting',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        bottomNavigationBar:BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.watch_later_outlined),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.text_snippet),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: '',
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  runApp(MaterialApp(
+    title: 'Named routes Demo',
+    // "/"을 앱이 시작하게 될 route로 지정합니다. 본 예제에서는 FirstScreen 위젯이 첫 번째 페이지가
+    // 될 것입니다.
+    initialRoute: '/',
+    routes: {
+      // When we navigate to the "/" route, build the FirstScreen Widget
+      // "/" Route로 이동하면, FirstScreen 위젯을 생성합니다.
+      '/': (context) => Home(),
+      // "/second" route로 이동하면, SecondScreen 위젯을 생성합니다.
+      // '/second': (context) => SecondScreen(),
+    },
+  ));
 }
